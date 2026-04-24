@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <!-- Theme init: runs before CSS renders to prevent flash of wrong theme -->
+  <script>
+    (function() {
+      var t = localStorage.getItem('dp-theme') || 'dark';
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Book your appointment at DemoParlour, Kochi. Contact us for services, bridal packages, and enquiries. Mon–Sat 9 AM to 8 PM." />
+  <title>Contact — DemoParlour</title>
+  <link rel="stylesheet" href="assets/css/styles.css" />
+  <style>
+    .contact-hero-bg { background-image: url('assets/images/salon_interior.png'); background-position: center 60%; }
+
+    /* Contact Layout */
+    .contact-layout {
+      display: grid;
+      grid-template-columns: 1fr 1.3fr;
+      gap: 60px;
+      align-items: start;
+    }
+
+    /* Info Column */
+    .contact-info-card {
+      padding: 48px 40px;
+      border-radius: var(--radius-xl);
+      position: sticky;
+      top: 100px;
+    }
+
+    .contact-info-title {
+      font-family: var(--font-display);
+      font-size: 1.8rem;
+      color: var(--color-cream);
+      margin-bottom: 8px;
+    }
+
+    .contact-info-sub {
+      font-size: 0.9rem;
+      color: var(--color-text-muted);
+      line-height: 1.7;
+      margin-bottom: 36px;
+    }
+
+    .contact-detail {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    .contact-detail-icon {
+      width: 44px;
+      height: 44px;
+      border: 1px solid var(--color-border);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      transition: var(--transition);
+    }
+
+    .contact-detail:hover .contact-detail-icon {
+      border-color: var(--color-gold);
+      background: rgba(201,168,76,0.1);
+    }
+
+    .contact-detail-info h4 {
+      font-family: var(--font-body);
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--color-gold);
+      margin-bottom: 4px;
+    }
+
+    .contact-detail-info p, .contact-detail-info a {
+      font-size: 0.92rem;
+      color: var(--color-text);
+      text-decoration: none;
+      line-height: 1.6;
+      transition: var(--transition-fast);
+    }
+
+    .contact-detail-info a:hover { color: var(--color-gold-light); }
+
+    .hours-table {
+      margin-top: 32px;
+      border-top: 1px solid var(--color-border);
+      padding-top: 24px;
+    }
+
+    .hours-table h4 {
+      font-family: var(--font-body);
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--color-gold);
+      margin-bottom: 16px;
+    }
+
+    .hours-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      font-size: 0.85rem;
+    }
+
+    .hours-row:last-child { border-bottom: none; }
+    .hours-row .day { color: var(--color-text-muted); }
+    .hours-row .time { color: var(--color-text); }
+
+    /* Form Column */
+    .booking-form-wrap {
+      padding: 48px 40px;
+      border-radius: var(--radius-xl);
+    }
+
+    .booking-form-wrap h3 {
+      font-family: var(--font-display);
+      font-size: 1.8rem;
+      color: var(--color-cream);
+      margin-bottom: 8px;
+    }
+
+    .form-sub {
+      font-size: 0.88rem;
+      color: var(--color-text-muted);
+      margin-bottom: 36px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .form-group.full { grid-column: 1 / -1; }
+
+    .form-group label {
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: 14px 18px;
+      color: var(--color-text);
+      font-family: var(--font-body);
+      font-size: 0.92rem;
+      outline: none;
+      transition: var(--transition);
+      width: 100%;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+
+    .form-group input::placeholder,
+    .form-group textarea::placeholder { color: rgba(168,152,128,0.5); }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--color-gold);
+      background: rgba(201,168,76,0.04);
+      box-shadow: 0 0 0 3px rgba(201,168,76,0.08);
+    }
+
+    .form-group select option { background: #1a1523; color: var(--color-text); }
+
+    .form-group textarea { resize: vertical; min-height: 120px; }
+
+    .form-submit {
+      margin-top: 24px;
+      width: 100%;
+      text-align: center;
+      justify-content: center;
+      font-size: 14px;
+      padding: 16px 40px;
+    }
+
+    .form-agree {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .form-agree input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+      accent-color: var(--color-gold);
+      margin-top: 2px;
+    }
+
+    .form-agree label {
+      font-size: 0.8rem;
+      color: var(--color-text-muted);
+      line-height: 1.6;
+      text-transform: none;
+      letter-spacing: 0;
+    }
+
+    .form-agree a { color: var(--color-gold); text-decoration: none; }
+
+    /* Success toast */
+    .toast {
+      position: fixed;
+      bottom: 32px;
+      right: 32px;
+      background: var(--color-surface);
+      border: 1px solid var(--color-gold);
+      border-radius: var(--radius-md);
+      padding: 18px 28px;
+      z-index: 99999;
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all 0.4s ease;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .toast.show { transform: translateY(0); opacity: 1; }
+    .toast-icon { font-size: 1.4rem; }
+    .toast-text { font-size: 0.9rem; color: var(--color-cream); }
+
+    /* Map Area */
+    .map-section {
+      margin-top: 80px;
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      position: relative;
+      height: 400px;
+      border: 1px solid var(--color-border);
+    }
+
+    .map-placeholder {
+      width: 100%;
+      height: 100%;
+      background: var(--color-surface);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+    }
+
+    .map-pin { font-size: 3rem; animation: float 3s ease-in-out infinite; }
+    .map-address { font-family: var(--font-display); font-size: 1.2rem; color: var(--color-cream); text-align: center; }
+    .map-sub { font-size: 0.85rem; color: var(--color-text-muted); text-align: center; }
+
+    /* FAQ */
+    .faq-list { margin-top: 60px; }
+
+    .faq-item {
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .faq-question {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 0;
+      cursor: pointer;
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      color: var(--color-cream);
+      transition: color 0.3s ease;
+      user-select: none;
+    }
+
+    .faq-question:hover { color: var(--color-gold-light); }
+
+    .faq-arrow {
+      font-size: 0.8rem;
+      color: var(--color-gold);
+      transition: transform 0.35s ease;
+      flex-shrink: 0;
+    }
+
+    .faq-item.open .faq-arrow { transform: rotate(180deg); }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, padding 0.4s ease;
+    }
+
+    .faq-item.open .faq-answer { max-height: 300px; padding-bottom: 20px; }
+
+    .faq-answer p { font-size: 0.9rem; color: var(--color-text-muted); line-height: 1.8; }
+
+    @media (max-width: 1024px) {
+      .contact-layout { grid-template-columns: 1fr; }
+      .contact-info-card { position: static; }
+    }
+
+    @media (max-width: 768px) {
+      .form-grid { grid-template-columns: 1fr; }
+      .booking-form-wrap { padding: 32px 24px; }
+      .contact-info-card { padding: 32px 24px; }
+    }
+
+    /* ---- Light Mode Overrides ---- */
+    [data-theme="light"] .contact-info-title { color: #181000; }
+    [data-theme="light"] .contact-info-sub { color: #4e3a10; }
+    [data-theme="light"] .contact-detail-info h4 { color: #7c5c14; }
+    [data-theme="light"] .contact-detail-info p,
+    [data-theme="light"] .contact-detail-info a { color: #1c1400; }
+    [data-theme="light"] .contact-detail-info a:hover { color: #7c5c14; }
+    [data-theme="light"] .hours-table h4 { color: #7c5c14; }
+    [data-theme="light"] .hours-table { border-top-color: rgba(100,72,16,0.2); }
+    [data-theme="light"] .hours-row { border-bottom-color: rgba(100,72,16,0.08); }
+    [data-theme="light"] .hours-row .day { color: #4e3a10; }
+    [data-theme="light"] .hours-row .time { color: #1c1400; }
+    [data-theme="light"] .booking-form-wrap h3 { color: #181000; }
+    [data-theme="light"] .form-sub { color: #4e3a10; }
+    [data-theme="light"] .form-group label { color: #4e3a10; }
+    [data-theme="light"] .form-group input,
+    [data-theme="light"] .form-group select,
+    [data-theme="light"] .form-group textarea {
+      background: rgba(0, 0, 0, 0.04);
+      border-color: rgba(100,72,16,0.25);
+      color: #1c1400;
+    }
+    [data-theme="light"] .form-group input::placeholder,
+    [data-theme="light"] .form-group textarea::placeholder { color: rgba(78,58,16,0.5); }
+    [data-theme="light"] .form-group input:focus,
+    [data-theme="light"] .form-group select:focus,
+    [data-theme="light"] .form-group textarea:focus {
+      border-color: #7c5c14;
+      background: rgba(124,92,20,0.04);
+      box-shadow: 0 0 0 3px rgba(124,92,20,0.1);
+    }
+    [data-theme="light"] .form-group select option {
+      background: #faf6f0;
+      color: #1c1400;
+    }
+    [data-theme="light"] .form-agree label { color: #4e3a10; }
+    [data-theme="light"] .form-agree a { color: #7c5c14; }
+    [data-theme="light"] .map-placeholder { background: var(--color-surface-2); }
+    [data-theme="light"] .map-address { color: #181000; }
+    [data-theme="light"] .map-sub { color: #4e3a10; }
+    [data-theme="light"] .map-section { border-color: rgba(100,72,16,0.2); }
+    [data-theme="light"] .faq-item { border-bottom-color: rgba(100,72,16,0.18); }
+    [data-theme="light"] .faq-question { color: #181000; }
+    [data-theme="light"] .faq-question:hover { color: #7c5c14; }
+    [data-theme="light"] .faq-arrow { color: #7c5c14; }
+    [data-theme="light"] .faq-answer p { color: #4e3a10; }
+    [data-theme="light"] .toast {
+      background: #fff;
+      border-color: #7c5c14;
+    }
+    [data-theme="light"] .toast-text { color: #181000; }
+  </style>
+</head>
+<body>
+  <canvas id="particle-canvas"></canvas>
+  <div class="page-transition"></div>
+  <div class="cursor-dot"></div>
+  <div class="cursor-ring"></div>
+
+  <nav class="navbar" id="navbar">
+    <a href="index.html" class="nav-logo">
+      <span class="nav-logo-main">Demo<span>Parlour</span></span>
+      <span class="nav-logo-sub">Luxury Parlour &amp; Spa</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html" class="active nav-cta">Book Now</a></li>
+    </ul>
+    <button class="theme-toggle" aria-label="Toggle theme">
+      <span class="toggle-icon">🌙</span>
+      <span class="toggle-label">Dark</span>
+    </button>
+    <div class="nav-hamburger" id="hamburger"><span></span><span></span><span></span></div>
+  </nav>
+  <div class="mobile-menu">
+    <a href="index.html">Home</a>
+    <a href="services.html">Services</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Book Now</a>
+    <button class="theme-toggle mobile-theme-toggle" aria-label="Toggle theme">
+      <span class="toggle-icon">🌙</span>
+      <span class="toggle-label">Dark</span>
+    </button>
+  </div>
+
+  <!-- Page Hero -->
+  <section class="page-hero">
+    <div class="page-hero-bg contact-hero-bg"></div>
+    <div class="page-hero-content">
+      <div class="section-label">Get in Touch</div>
+      <h1>Book Your <em style="font-style:italic;color:var(--color-gold-light);">Experience</em></h1>
+    </div>
+  </section>
+
+  <!-- ===== CONTACT SECTION ===== -->
+  <section class="section">
+    <div class="contact-layout">
+
+      <!-- Info Column -->
+      <div>
+        <div class="contact-info-card glass-card reveal">
+          <h3 class="contact-info-title">We'd Love to<br>Hear From You</h3>
+          <p class="contact-info-sub">Reach out to us for bookings, enquiries, or just to say hello. Our team typically responds within 2 hours during working hours.</p>
+          <div class="gold-divider"><span>✦</span></div>
+
+          <div class="contact-detail">
+            <div class="contact-detail-icon">📍</div>
+            <div class="contact-detail-info">
+              <h4>Address</h4>
+              <p>12-A Gold Avenue, MG Road,<br>Kochi, Kerala — 682 016</p>
+            </div>
+          </div>
+
+          <div class="contact-detail">
+            <div class="contact-detail-icon">📞</div>
+            <div class="contact-detail-info">
+              <h4>Phone / WhatsApp</h4>
+              <a href="tel:+919876543210">+91 98765 43210</a><br>
+              <a href="tel:+918765432100">+91 87654 32100</a>
+            </div>
+          </div>
+
+          <div class="contact-detail">
+            <div class="contact-detail-icon">✉</div>
+            <div class="contact-detail-info">
+              <h4>Email</h4>
+              <a href="mailto:hello@demoparlour.in">hello@demoparlour.in</a><br>
+              <a href="mailto:bridal@demoparlour.in">bridal@demoparlour.in</a>
+            </div>
+          </div>
+
+          <div class="hours-table">
+            <h4>Opening Hours</h4>
+            <div class="hours-row"><span class="day">Monday – Friday</span><span class="time">9:00 AM – 8:00 PM</span></div>
+            <div class="hours-row"><span class="day">Saturday</span><span class="time">9:00 AM – 8:00 PM</span></div>
+            <div class="hours-row"><span class="day">Sunday</span><span class="time">10:00 AM – 6:00 PM</span></div>
+            <div class="hours-row"><span class="day">Public Holidays</span><span class="time">10:00 AM – 5:00 PM</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Form Column -->
+      <div class="booking-form-wrap glass-card reveal">
+        <h3>Book an Appointment</h3>
+        <p class="form-sub">Fill in the form below and our team will confirm your booking within 2 hours.</p>
+        <form id="booking-form" novalidate>
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="fname">First Name *</label>
+              <input type="text" id="fname" name="fname" placeholder="Amala" required />
+            </div>
+            <div class="form-group">
+              <label for="lname">Last Name</label>
+              <input type="text" id="lname" name="lname" placeholder="Krishnan" />
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone Number *</label>
+              <input type="tel" id="phone" name="phone" placeholder="+91 98765 43210" required />
+            </div>
+            <div class="form-group">
+              <label for="email">Email Address</label>
+              <input type="email" id="email" name="email" placeholder="you@email.com" />
+            </div>
+            <div class="form-group">
+              <label for="service">Service Interested In *</label>
+              <select id="service" name="service" required>
+                <option value="" disabled selected>Choose a Service</option>
+                <option value="hair">Hair Artistry</option>
+                <option value="makeup">Makeup Studio</option>
+                <option value="skin">Skin &amp; Spa</option>
+                <option value="nail">Nail Couture</option>
+                <option value="brow">Brow &amp; Lash</option>
+                <option value="bridal">Bridal Package</option>
+                <option value="other">Other / Unsure</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="date">Preferred Date</label>
+              <input type="date" id="date" name="date" />
+            </div>
+            <div class="form-group">
+              <label for="time">Preferred Time</label>
+              <select id="time" name="time">
+                <option value="" disabled selected>Choose a Time Slot</option>
+                <option>09:00 AM</option>
+                <option>10:00 AM</option>
+                <option>11:00 AM</option>
+                <option>12:00 PM</option>
+                <option>01:00 PM</option>
+                <option>02:00 PM</option>
+                <option>03:00 PM</option>
+                <option>04:00 PM</option>
+                <option>05:00 PM</option>
+                <option>06:00 PM</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="how">How Did You Hear?</label>
+              <select id="how" name="how">
+                <option value="" disabled selected>Select an Option</option>
+                <option>Instagram</option>
+                <option>Google Search</option>
+                <option>Friend / Family</option>
+                <option>Walk-in</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="form-group full">
+              <label for="notes">Additional Notes / Requests</label>
+              <textarea id="notes" name="notes" placeholder="Tell us anything special — skin concerns, event type, special requests..."></textarea>
+            </div>
+          </div>
+
+          <div class="form-agree">
+            <input type="checkbox" id="agree" name="agree" required />
+            <label for="agree">I agree to the <a href="#">Terms &amp; Privacy Policy</a>. I understand that my booking will be confirmed via phone or email.</label>
+          </div>
+
+          <button type="submit" class="btn btn-gold form-submit" id="submit-btn">
+            ✨ Confirm My Booking
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Map Placeholder -->
+    <div class="map-section reveal">
+      <div class="map-placeholder">
+        <div class="map-pin">📍</div>
+        <div class="map-address">12-A Gold Avenue, MG Road, Kochi</div>
+        <div class="map-sub">Kerala, India — 682 016</div>
+        <a href="https://maps.google.com" target="_blank" class="btn btn-outline" style="margin-top:8px;">Open in Google Maps ↗</a>
+      </div>
+    </div>
+
+    <!-- FAQ -->
+    <div style="margin-top: 100px;">
+      <div style="text-align:center; margin-bottom:48px;">
+        <div class="section-label reveal" style="justify-content:center;">Got Questions?</div>
+        <h2 class="section-title reveal">Frequently <em>Asked</em></h2>
+      </div>
+
+      <div class="faq-list reveal">
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            Do I need to book in advance?
+            <span class="faq-arrow">▼</span>
+          </div>
+          <div class="faq-answer">
+            <p>Yes, we strongly recommend booking at least 24 hours in advance to secure your preferred time slot. For bridal packages, we recommend booking at least 2–3 months ahead. Walk-ins are welcome based on availability.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            What is your cancellation policy?
+            <span class="faq-arrow">▼</span>
+          </div>
+          <div class="faq-answer">
+            <p>We kindly request at least 24 hours' notice for cancellations or rescheduling. Cancellations within 12 hours may incur a 20% cancellation fee. Bridal package bookings require 72 hours' notice for full refunds.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            Do you offer home visits for bridal makeup?
+            <span class="faq-arrow">▼</span>
+          </div>
+          <div class="faq-answer">
+            <p>Absolutely! We offer premium at-home bridal services within a 20 km radius of our studio. Travel fees may apply depending on distance. Please mention this when booking and our team will curate a bespoke package for you.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            What brands do you use?
+            <span class="faq-arrow">▼</span>
+          </div>
+          <div class="faq-answer">
+            <p>We exclusively use premium, cruelty-free brands including Charlotte Tilbury, MAC, Kérastase, L'Oréal Professionnel, OPI, and several luxury Indian brands. All our skincare products are dermatologically tested and safe for sensitive skin.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            Is parking available?
+            <span class="faq-arrow">▼</span>
+          </div>
+          <div class="faq-answer">
+            <p>Yes! We have complimentary parking for up to 2 hours in the building's basement. Additional parking is available on MG Road and at the nearby shopping complex. We also partner with ride-sharing apps for easy drop-off.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Toast Notification -->
+  <div class="toast" id="toast">
+    <span class="toast-icon">✨</span>
+    <span class="toast-text">Booking request sent! We'll confirm within 2 hours.</span>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>Demo<span>Parlour</span></h3>
+        <div class="gold-divider" style="max-width:200px;"><span>✦</span></div>
+        <p>A temple of beauty, crafted for the discerning.</p>
+        <div class="footer-social">
+          <a href="#" class="social-icon">✦</a>
+          <a href="#" class="social-icon">f</a>
+          <a href="#" class="social-icon">▶</a>
+          <a href="#" class="social-icon">P</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="services.html">Hair Styling</a></li>
+          <li><a href="services.html">Makeup Artistry</a></li>
+          <li><a href="services.html">Skin &amp; Facial</a></li>
+          <li><a href="services.html">Nail Couture</a></li>
+          <li><a href="services.html">Bridal Packages</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Visit Us</h4>
+        <ul>
+          <li><a href="#">📍 12-A Gold Avenue, MG Road, Kochi</a></li>
+          <li><a href="tel:+919876543210">📞 +91 98765 43210</a></li>
+          <li><a href="mailto:hello@lumierebeauty.in">✉ hello@lumierebeauty.in</a></li>
+          <li><a href="#">⏰ Mon–Sat: 9 AM – 8 PM</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 DemoParlour. All rights reserved.</p>
+      <p>Crafted with <span style="color:var(--color-rose);">♥</span> for beauty lovers.</p>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+  <script>
+    // Form Submit
+    document.getElementById('booking-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const btn = document.getElementById('submit-btn');
+      btn.textContent = 'Sending...';
+      btn.style.opacity = '0.7';
+      btn.disabled = true;
+      setTimeout(() => {
+        btn.textContent = '✓ Booking Sent!';
+        btn.style.opacity = '1';
+        const toast = document.getElementById('toast');
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 4500);
+        this.reset();
+        setTimeout(() => {
+          btn.textContent = '✨ Confirm My Booking';
+          btn.disabled = false;
+        }, 3000);
+      }, 1500);
+    });
+
+    // FAQ Toggle
+    function toggleFaq(el) {
+      const item = el.closest('.faq-item');
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    }
+
+    // Min date for date input
+    const dateInput = document.getElementById('date');
+    if (dateInput) {
+      const today = new Date().toISOString().split('T')[0];
+      dateInput.setAttribute('min', today);
+    }
+  </script>
+</body>
+</html>

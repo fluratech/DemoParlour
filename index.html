@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <!-- Theme init: runs before CSS renders to prevent flash of wrong theme -->
+  <script>
+    (function() {
+      var t = localStorage.getItem('dp-theme') || 'dark';
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="DemoParlour — A luxury beauty parlor offering bespoke hair, makeup, skincare, and nail artistry. Discover beauty reimagined." />
+  <meta name="keywords" content="luxury beauty parlor, premium salon, makeup artistry, hair styling, spa treatments, bridal beauty" />
+  <title>DemoParlour — Where Beauty is an Art</title>
+  <link rel="stylesheet" href="assets/css/styles.css" />
+  <link rel="stylesheet" href="assets/css/index.css" />
+</head>
+<body>
+
+  <!-- Loading Screen -->
+  <div id="loading-screen">
+    <div class="loading-logo">Demo<span>Parlour</span></div>
+    <div class="loading-bar-wrap"><div class="loading-bar"></div></div>
+  </div>
+
+  <!-- Particle Canvas -->
+  <canvas id="particle-canvas"></canvas>
+
+  <!-- Page Transition -->
+  <div class="page-transition"></div>
+
+  <!-- Custom Cursor -->
+  <div class="cursor-dot"></div>
+  <div class="cursor-ring"></div>
+
+  <!-- Navigation -->
+  <nav class="navbar" id="navbar">
+    <a href="index.html" class="nav-logo">
+      <span class="nav-logo-main">Demo<span>Parlour</span></span>
+      <span class="nav-logo-sub">Luxury Parlour &amp; Spa</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html" class="nav-cta">Book Now</a></li>
+    </ul>
+    <button class="theme-toggle" id="theme-toggle-btn" aria-label="Toggle theme">
+      <span class="toggle-icon">🌙</span>
+      <span class="toggle-label">Dark</span>
+    </button>
+    <div class="nav-hamburger" id="hamburger">
+      <span></span><span></span><span></span>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu">
+    <a href="index.html">Home</a>
+    <a href="services.html">Services</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Book Now</a>
+    <button class="theme-toggle mobile-theme-toggle" aria-label="Toggle theme">
+      <span class="toggle-icon">🌙</span>
+      <span class="toggle-label">Dark</span>
+    </button>
+  </div>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero">
+    <div class="hero-bg" id="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-eyebrow">Est. 2018 &bull; Award-Winning Beauty Studio</div>
+      <h1 class="hero-title">
+        Redefining<br>
+        <em>Timeless Beauty</em>
+      </h1>
+      <p class="hero-description">
+        Where every treatment is a work of art. Experience unparalleled luxury with our team of world-class beauty artisans, crafting your most radiant self.
+      </p>
+      <div class="hero-actions">
+        <a href="services.html" class="btn btn-gold">Explore Services</a>
+        <a href="gallery.html" class="btn btn-outline">View Gallery ↗</a>
+      </div>
+    </div>
+
+    <div class="hero-stats">
+      <div class="stat-item">
+        <div class="stat-number"><span data-count="2800" data-suffix="+">0</span></div>
+        <div class="stat-label">Happy Clients</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number"><span data-count="12">0</span></div>
+        <div class="stat-label">Expert Artists</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number"><span data-count="6">0</span>+</div>
+        <div class="stat-label">Years of Excellence</div>
+      </div>
+    </div>
+
+    <div class="hero-scroll">
+      <div class="scroll-line"></div>
+      <span>Scroll</span>
+    </div>
+  </section>
+
+  <!-- ===== SERVICES PREVIEW ===== -->
+  <section class="section services-preview">
+    <div class="section-header reveal">
+      <div class="section-label">What We Offer</div>
+      <h2 class="section-title">Signature <em>Services</em></h2>
+      <p class="section-subtitle">Each service is a sensorial journey — meticulously crafted to celebrate your unique beauty.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card tilt-card reveal reveal-delay-1">
+        <img src="assets/images/hair_styling.png" alt="Hair Styling" class="service-card-img" />
+        <div class="service-card-overlay">
+          <div class="service-card-icon">✂️</div>
+          <div class="service-card-subtitle">Signature</div>
+          <div class="service-card-title">Hair Artistry</div>
+          <div class="service-card-price">From ₹800 &bull; 60–90 min</div>
+        </div>
+        <div class="service-card-border"></div>
+      </div>
+      <div class="service-card tilt-card reveal reveal-delay-2">
+        <img src="assets/images/makeup_service.png" alt="Makeup" class="service-card-img" />
+        <div class="service-card-overlay">
+          <div class="service-card-icon">💄</div>
+          <div class="service-card-subtitle">Expert</div>
+          <div class="service-card-title">Makeup Studio</div>
+          <div class="service-card-price">From ₹1,200 &bull; 45–75 min</div>
+        </div>
+        <div class="service-card-border"></div>
+      </div>
+      <div class="service-card tilt-card reveal reveal-delay-3">
+        <img src="assets/images/spa_facial.png" alt="Spa & Facial" class="service-card-img" />
+        <div class="service-card-overlay">
+          <div class="service-card-icon">🌸</div>
+          <div class="service-card-subtitle">Luxury</div>
+          <div class="service-card-title">Skin &amp; Spa</div>
+          <div class="service-card-price">From ₹1,500 &bull; 60–120 min</div>
+        </div>
+        <div class="service-card-border"></div>
+      </div>
+      <div class="service-card tilt-card reveal reveal-delay-4">
+        <img src="assets/images/nail_beauty.png" alt="Nail Art" class="service-card-img" />
+        <div class="service-card-overlay">
+          <div class="service-card-icon">💅</div>
+          <div class="service-card-subtitle">Artistic</div>
+          <div class="service-card-title">Nail Couture</div>
+          <div class="service-card-price">From ₹500 &bull; 30–60 min</div>
+        </div>
+        <div class="service-card-border"></div>
+      </div>
+    </div>
+    <div style="text-align:center; margin-top:48px;" class="reveal">
+      <a href="services.html" class="btn btn-outline">View All Services</a>
+    </div>
+  </section>
+
+  <!-- ===== ABOUT STRIP ===== -->
+  <section class="about-strip">
+    <div class="about-strip-inner">
+      <div class="about-strip-image parallax-img">
+        <img src="assets/images/salon_interior.png" alt="DemoParlour Salon Interior" />
+      </div>
+      <div class="about-strip-content">
+        <div class="section-label reveal">Our Studio</div>
+        <h2 class="section-title reveal">A Sanctuary of<br><em>Pure Luxury</em></h2>
+        <p class="section-subtitle reveal" style="margin-top:16px;">
+          Nestled in the heart of the city, DemoParlour is more than a salon — it's an immersive escape where every detail is curated for your total transformation. Our bespoke approach ensures every visit feels personal, indulgent, and unforgettable.
+        </p>
+        <div class="about-features">
+          <div class="about-feature glass-card reveal reveal-delay-1">
+            <div class="about-feature-icon">✨</div>
+            <h4>Premium Products</h4>
+            <p>Only the finest luxury beauty brands adorn our shelves.</p>
+          </div>
+          <div class="about-feature glass-card reveal reveal-delay-2">
+            <div class="about-feature-icon">👑</div>
+            <h4>Expert Artists</h4>
+            <p>Internationally trained stylists with a passion for perfection.</p>
+          </div>
+          <div class="about-feature glass-card reveal reveal-delay-3">
+            <div class="about-feature-icon">🌿</div>
+            <h4>Eco-Conscious</h4>
+            <p>Sustainable beauty practices that care for you and the earth.</p>
+          </div>
+          <div class="about-feature glass-card reveal reveal-delay-4">
+            <div class="about-feature-icon">💎</div>
+            <h4>VIP Experience</h4>
+            <p>Personalized consultations and exclusive member privileges.</p>
+          </div>
+        </div>
+        <div style="margin-top:36px;" class="reveal">
+          <a href="about.html" class="btn btn-gold">Discover Our Story</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== TESTIMONIALS ===== -->
+  <section class="section testimonials">
+    <div class="section-header" style="text-align:center;">
+      <div class="section-label reveal" style="justify-content:center;">Client Stories</div>
+      <h2 class="section-title reveal">Loved by <em>Thousands</em></h2>
+    </div>
+    <div class="testimonials-track">
+      <div class="testimonial-card glass-card tilt-card reveal reveal-delay-1">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">"DemoParlour transformed my entire wedding look. I felt like royalty walking down the aisle. The bridal package was an experience beyond words — pure magic."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">A</div>
+          <div>
+            <div class="testimonial-name">Aisha Nair</div>
+            <div class="testimonial-role">Bride, Kochi Wedding 2024</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card glass-card tilt-card reveal reveal-delay-2">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">"The facial treatment here is unlike anything I've experienced. My skin was glowing for weeks. The ambiance alone makes you feel like you're in a five-star resort."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">P</div>
+          <div>
+            <div class="testimonial-name">Priya Menon</div>
+            <div class="testimonial-role">Regular Client since 2022</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card glass-card tilt-card reveal reveal-delay-3">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">"Every time I leave DemoParlour, I walk out feeling like a completely new person. Their nail art team is simply extraordinary — creative geniuses!"</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">S</div>
+          <div>
+            <div class="testimonial-name">Sneha Raj</div>
+            <div class="testimonial-role">Nail Art Enthusiast</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== INSTAGRAM / GALLERY STRIP ===== -->
+  <section class="insta-strip">
+    <div class="insta-grid">
+      <div class="insta-item">
+        <img src="assets/images/bridal_makeup.png" alt="Bridal Beauty" />
+        <div class="insta-hover">♥</div>
+      </div>
+      <div class="insta-item">
+        <img src="assets/images/hair_styling.png" alt="Hair Styling" />
+        <div class="insta-hover">♥</div>
+      </div>
+      <div class="insta-item">
+        <img src="assets/images/nail_beauty.png" alt="Nail Art" />
+        <div class="insta-hover">♥</div>
+      </div>
+      <div class="insta-item">
+        <img src="assets/images/spa_facial.png" alt="Spa Facial" />
+        <div class="insta-hover">♥</div>
+      </div>
+      <div class="insta-item">
+        <img src="assets/images/makeup_service.png" alt="Makeup" />
+        <div class="insta-hover">♥</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CTA BANNER ===== -->
+  <section class="cta-banner">
+    <div class="cta-banner-ring"></div>
+    <div class="cta-banner-ring"></div>
+    <div class="cta-banner-ring"></div>
+    <div class="cta-banner-content">
+      <div class="section-label reveal" style="justify-content:center;">Ready to Glow?</div>
+      <h2 class="reveal">Your Most Radiant Self<br>Awaits <em class="text-gold">You</em></h2>
+      <p class="reveal">Book your exclusive appointment today and step into a world of effortless beauty.</p>
+      <div class="cta-actions reveal">
+        <a href="contact.html" class="btn btn-gold">Book an Appointment</a>
+        <a href="tel:+919876543210" class="btn btn-outline">📞 Call Us</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>Demo<span>Parlour</span></h3>
+        <div class="gold-divider" style="max-width:200px;"><span>✦</span></div>
+        <p>A temple of beauty, crafted for the discerning. Where every visit is a celebration of who you are and who you're becoming.</p>
+        <div class="footer-social">
+          <a href="#" class="social-icon" title="Instagram">✦</a>
+          <a href="#" class="social-icon" title="Facebook">f</a>
+          <a href="#" class="social-icon" title="YouTube">▶</a>
+          <a href="#" class="social-icon" title="Pinterest">P</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="services.html">Hair Styling</a></li>
+          <li><a href="services.html">Makeup Artistry</a></li>
+          <li><a href="services.html">Skin &amp; Facial</a></li>
+          <li><a href="services.html">Nail Couture</a></li>
+          <li><a href="services.html">Bridal Packages</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Visit Us</h4>
+        <ul>
+          <li><a href="#">📍 12-A Gold Avenue, MG Road, Kochi, Kerala</a></li>
+          <li><a href="tel:+919876543210">📞 +91 98765 43210</a></li>
+          <li><a href="mailto:hello@lumierebeauty.in">✉ hello@lumierebeauty.in</a></li>
+          <li><a href="#">⏰ Mon–Sat: 9:00 AM – 8:00 PM</a></li>
+          <li><a href="#">⏰ Sun: 10:00 AM – 6:00 PM</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 DemoParlour. All rights reserved.</p>
+      <p>Crafted with <span style="color:var(--color-rose);">♥</span> for beauty lovers everywhere.</p>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <!-- Theme init: runs before CSS renders to prevent flash of wrong theme -->
+  <script>
+    (function() {
+      var t = localStorage.getItem('dp-theme') || 'dark';
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Discover the story behind DemoParlour — our passion, our team, and our commitment to making every client feel extraordinary." />
+  <title>About Us — DemoParlour</title>
+  <link rel="stylesheet" href="assets/css/styles.css" />
+  <style>
+    .about-hero-bg { background-image: url('assets/images/salon_interior.png'); }
+
+    /* Mission Section */
+    .mission-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .mission-visual {
+      position: relative;
+    }
+
+    .mission-img-main {
+      width: 100%;
+      height: 540px;
+      object-fit: cover;
+      object-position: center top;
+      border-radius: var(--radius-xl);
+      display: block;
+    }
+
+    .mission-img-accent {
+      position: absolute;
+      bottom: -24px;
+      left: -24px;
+      width: 180px;
+      height: 180px;
+      object-fit: cover;
+      border-radius: var(--radius-lg);
+      border: 5px solid var(--color-bg);
+      animation: float 6s ease-in-out infinite;
+    }
+
+    .mission-ring {
+      position: absolute;
+      top: -16px; right: -16px;
+      width: 120px; height: 120px;
+      border: 1px solid var(--color-gold);
+      border-radius: 50%;
+      opacity: 0.4;
+      animation: rotate-slow 20s linear infinite;
+    }
+
+    .mission-text {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      font-style: italic;
+      color: var(--color-cream);
+      line-height: 1.8;
+      border-left: 2px solid var(--color-gold);
+      padding-left: 24px;
+      margin: 32px 0;
+    }
+
+    /* Values Section */
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 60px;
+    }
+
+    .value-card {
+      padding: 40px 32px;
+      text-align: center;
+      border-radius: var(--radius-lg);
+      transition: var(--transition);
+    }
+
+    .value-card:hover {
+      transform: translateY(-10px);
+      box-shadow: var(--shadow-gold);
+      border-color: rgba(201,168,76,0.3);
+    }
+
+    .value-icon {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      display: block;
+    }
+
+    .value-title {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      color: var(--color-cream);
+      margin-bottom: 12px;
+    }
+
+    .value-desc {
+      font-size: 0.88rem;
+      color: var(--color-text-muted);
+      line-height: 1.8;
+    }
+
+    /* Team */
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      margin-top: 60px;
+    }
+
+    .team-card {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      transition: var(--transition);
+      cursor: pointer;
+    }
+
+    .team-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-gold);
+    }
+
+    .team-img-wrap {
+      position: relative;
+      height: 280px;
+      overflow: hidden;
+    }
+
+    .team-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      transition: transform 0.6s ease;
+      filter: saturate(0.8);
+    }
+
+    .team-card:hover .team-img-wrap img {
+      transform: scale(1.06);
+      filter: saturate(1);
+    }
+
+    .team-img-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(12,10,15,0.8) 0%, transparent 60%);
+    }
+
+    .team-info {
+      padding: 20px;
+    }
+
+    .team-name {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      color: var(--color-cream);
+      margin-bottom: 4px;
+    }
+
+    .team-role {
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--color-gold);
+      margin-bottom: 10px;
+    }
+
+    .team-bio {
+      font-size: 0.82rem;
+      color: var(--color-text-muted);
+      line-height: 1.7;
+    }
+
+    /* Numbers / Milestones */
+    .milestones {
+      background: var(--color-bg-2);
+      border-top: 1px solid var(--color-border);
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .milestones-inner {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+    }
+
+    .milestone-item {
+      padding: 60px 40px;
+      text-align: center;
+      border-right: 1px solid var(--color-border);
+      transition: var(--transition);
+    }
+
+    .milestone-item:last-child { border-right: none; }
+
+    .milestone-item:hover { background: rgba(201,168,76,0.04); }
+
+    .milestone-number {
+      font-family: var(--font-display);
+      font-size: 3.5rem;
+      font-weight: 300;
+      color: var(--color-gold-light);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .milestone-label {
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+    }
+
+    /* Timeline */
+    .timeline {
+      position: relative;
+      padding: 60px 0;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      top: 0; bottom: 0;
+      width: 1px;
+      background: linear-gradient(to bottom, transparent, var(--color-gold) 20%, var(--color-gold) 80%, transparent);
+      opacity: 0.3;
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 32px;
+      align-items: center;
+      margin-bottom: 56px;
+    }
+
+    .timeline-item:nth-child(even) .timeline-text { order: 3; text-align: left; }
+    .timeline-item:nth-child(even) .timeline-empty { order: 1; }
+    .timeline-item:nth-child(odd) .timeline-text { text-align: right; }
+
+    .timeline-dot {
+      width: 16px;
+      height: 16px;
+      background: var(--color-gold);
+      border-radius: 50%;
+      border: 3px solid var(--color-bg);
+      box-shadow: 0 0 0 4px rgba(201,168,76,0.2);
+      flex-shrink: 0;
+    }
+
+    .timeline-year {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      color: var(--color-gold-light);
+      margin-bottom: 6px;
+    }
+
+    .timeline-desc {
+      font-size: 0.9rem;
+      color: var(--color-text-muted);
+      line-height: 1.7;
+    }
+
+    @media (max-width: 1024px) {
+      .mission-section { grid-template-columns: 1fr; gap: 48px; }
+      .mission-img-main { height: 380px; }
+      .team-grid { grid-template-columns: repeat(2, 1fr); }
+      .milestones-inner { grid-template-columns: repeat(2, 1fr); }
+      .milestone-item:nth-child(2) { border-right: none; }
+      .milestone-item { border-bottom: 1px solid var(--color-border); }
+      .values-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      .team-grid { grid-template-columns: 1fr 1fr; }
+      .milestones-inner { grid-template-columns: 1fr 1fr; }
+      .values-grid { grid-template-columns: 1fr; }
+      .timeline::before { left: 24px; }
+      .timeline-item { grid-template-columns: auto 1fr; }
+      .timeline-item .timeline-empty { display: none; }
+      .timeline-item:nth-child(even) .timeline-text { order: unset; text-align: left; }
+      .timeline-item:nth-child(odd) .timeline-text { text-align: left; }
+    }
+
+    @media (max-width: 480px) {
+      .team-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ---- Light Mode Overrides ---- */
+    [data-theme="light"] .mission-text {
+      color: #181000;
+      border-left-color: #7c5c14;
+    }
+    [data-theme="light"] .value-title { color: #181000; }
+    [data-theme="light"] .value-desc { color: #4e3a10; }
+    [data-theme="light"] .value-card:hover { background: rgba(124,92,20,0.06); }
+    [data-theme="light"] .team-img-overlay {
+      background: linear-gradient(to top, rgba(240,230,212,0.9) 0%, transparent 60%);
+    }
+    [data-theme="light"] .team-name { color: #181000; }
+    [data-theme="light"] .team-role { color: #7c5c14; }
+    [data-theme="light"] .team-bio { color: #4e3a10; }
+    [data-theme="light"] .milestones {
+      background: var(--color-bg-2);
+      border-top-color: rgba(100,72,16,0.2);
+      border-bottom-color: rgba(100,72,16,0.2);
+    }
+    [data-theme="light"] .milestone-number { color: #7c5c14; }
+    [data-theme="light"] .milestone-label { color: #4e3a10; }
+    [data-theme="light"] .milestone-item { border-right-color: rgba(100,72,16,0.15); }
+    [data-theme="light"] .milestone-item:hover { background: rgba(124,92,20,0.04); }
+    [data-theme="light"] .timeline-year { color: #7c5c14; }
+    [data-theme="light"] .timeline-desc { color: #4e3a10; }
+    [data-theme="light"] .timeline::before {
+      background: linear-gradient(to bottom, transparent, #7c5c14 20%, #7c5c14 80%, transparent);
+      opacity: 0.4;
+    }
+    [data-theme="light"] .timeline-dot {
+      background: #7c5c14;
+      border-color: #faf6f0;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="particle-canvas"></canvas>
+  <div class="page-transition"></div>
+  <div class="cursor-dot"></div>
+  <div class="cursor-ring"></div>
+
+  <nav class="navbar" id="navbar">
+    <a href="index.html" class="nav-logo">
+      <span class="nav-logo-main">Demo<span>Parlour</span></span>
+      <span class="nav-logo-sub">Luxury Parlour &amp; Spa</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+      <li><a href="about.html" class="active">About</a></li>
+      <li><a href="contact.html" class="nav-cta">Book Now</a></li>
+    </ul>
+    <button class="theme-toggle" aria-label="Toggle theme">
+      <span class="toggle-icon">🌙</span>
+      <span class="toggle-label">Dark</span>
+    </button>
+    <div class="nav-hamburger" id="hamburger"><span></span><span></span><span></span></div>
+  </nav>
+  <div class="mobile-menu">
+    <a href="index.html">Home</a>
+    <a href="services.html">Services</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Book Now</a>
+    <button class="theme-toggle mobile-theme-toggle" aria-label="Toggle theme">
+      <span class="toggle-icon">🌙</span>
+      <span class="toggle-label">Dark</span>
+    </button>
+  </div>
+
+  <!-- Page Hero -->
+  <section class="page-hero">
+    <div class="page-hero-bg about-hero-bg"></div>
+    <div class="page-hero-content">
+      <div class="section-label">Our Story</div>
+      <h1>We Are <em style="font-style:italic;color:var(--color-gold-light);">DemoParlour</em></h1>
+    </div>
+  </section>
+
+  <!-- ===== MISSION ===== -->
+  <section class="section">
+    <div class="mission-section">
+      <div class="mission-visual reveal">
+        <img src="assets/images/team_stylist.png" alt="DemoParlour Team" class="mission-img-main" />
+        <img src="assets/images/makeup_service.png" alt="Makeup Art" class="mission-img-accent" />
+        <div class="mission-ring"></div>
+      </div>
+      <div>
+        <div class="section-label reveal">Who We Are</div>
+        <h2 class="section-title reveal">Born From a <em>Passion</em><br>for Beauty</h2>
+        <blockquote class="mission-text reveal">
+          "We believe beauty is not something you put on — it's something you reveal. Our purpose is to uncover the extraordinary in every person who walks through our doors."
+        </blockquote>
+        <p class="reveal" style="color:var(--color-text-muted);font-size:0.92rem;line-height:1.85;">
+          Founded in 2018 by Meena Krishnan and Zara Ali, DemoParlour was born from a shared vision: to create a space where artistry, luxury, and warmth coexist in perfect harmony. What started as a small studio with two artists has grown into Kochi's most sought-after beauty destination.
+        </p>
+        <p class="reveal" style="color:var(--color-text-muted);font-size:0.92rem;line-height:1.85;margin-top:16px;">
+          Today, our team of 12 world-class beauty specialists bring together expertise from Paris, Mumbai, and London — united by one goal: making you feel like the most beautiful version of yourself.
+        </p>
+        <div style="margin-top:36px;" class="reveal">
+          <a href="contact.html" class="btn btn-gold">Book an Experience</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== MILESTONES ===== -->
+  <section class="milestones">
+    <div class="milestones-inner">
+      <div class="milestone-item reveal">
+        <div class="milestone-number" data-count="2800" data-suffix="+">0+</div>
+        <div class="milestone-label">Happy Clients</div>
+      </div>
+      <div class="milestone-item reveal reveal-delay-1">
+        <div class="milestone-number" data-count="12">0</div>
+        <div class="milestone-label">Expert Artists</div>
+      </div>
+      <div class="milestone-item reveal reveal-delay-2">
+        <div class="milestone-number" data-count="200" data-suffix="+">0+</div>
+        <div class="milestone-label">Bridal Looks</div>
+      </div>
+      <div class="milestone-item reveal reveal-delay-3">
+        <div class="milestone-number" data-count="6">0</div>
+        <div class="milestone-label">Industry Awards</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== VALUES ===== -->
+  <section class="section">
+    <div style="text-align:center;">
+      <div class="section-label reveal" style="justify-content:center;">What Drives Us</div>
+      <h2 class="section-title reveal">Our <em>Core Values</em></h2>
+    </div>
+    <div class="values-grid">
+      <div class="value-card glass-card tilt-card reveal reveal-delay-1">
+        <span class="value-icon">✨</span>
+        <h3 class="value-title">Artistry First</h3>
+        <p class="value-desc">Beauty is a craft. We approach every client as a blank canvas, bringing our artistic vision alive with precision and passion.</p>
+      </div>
+      <div class="value-card glass-card tilt-card reveal reveal-delay-2">
+        <span class="value-icon">🌿</span>
+        <h3 class="value-title">Conscious Beauty</h3>
+        <p class="value-desc">We partner exclusively with cruelty-free, sustainable beauty brands that are as good for your skin as they are for the planet.</p>
+      </div>
+      <div class="value-card glass-card tilt-card reveal reveal-delay-3">
+        <span class="value-icon">💛</span>
+        <h3 class="value-title">Genuine Care</h3>
+        <p class="value-desc">Every client is family. From the moment you walk in, you're surrounded by warmth, attentiveness, and genuine human connection.</p>
+      </div>
+      <div class="value-card glass-card tilt-card reveal reveal-delay-1">
+        <span class="value-icon">🔬</span>
+        <h3 class="value-title">Innovation</h3>
+        <p class="value-desc">We stay ahead of beauty trends, continuously training with global masters to bring the latest techniques to our clients first.</p>
+      </div>
+      <div class="value-card glass-card tilt-card reveal reveal-delay-2">
+        <span class="value-icon">👑</span>
+        <h3 class="value-title">Excellence</h3>
+        <p class="value-desc">We never compromise on quality. From our tools to our hospitality, everything embodies the highest standard of luxury.</p>
+      </div>
+      <div class="value-card glass-card tilt-card reveal reveal-delay-3">
+        <span class="value-icon">🤝</span>
+        <h3 class="value-title">Inclusivity</h3>
+        <p class="value-desc">Beauty has no boundaries. We celebrate every skin tone, hair texture, and style — because every person deserves to feel radiant.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== TEAM ===== -->
+  <section class="section" style="padding-top:40px; background:var(--color-bg-2);">
+    <div class="section-header" style="text-align:center;">
+      <div class="section-label reveal" style="justify-content:center;">The Visionaries</div>
+      <h2 class="section-title reveal">Meet Our <em>Artists</em></h2>
+      <p class="section-subtitle reveal" style="margin:12px auto 0;text-align:center;">Talented, passionate, and endlessly creative — our team is the heartbeat of DemoParlour.</p>
+    </div>
+    <div class="team-grid">
+      <div class="team-card glass-card reveal reveal-delay-1">
+        <div class="team-img-wrap">
+          <img src="assets/images/team_stylist.png" alt="Meena Krishnan" style="object-position: 10% top;" />
+          <div class="team-img-overlay"></div>
+        </div>
+        <div class="team-info">
+          <div class="team-name">Meena Krishnan</div>
+          <div class="team-role">Co-Founder &bull; Head Stylist</div>
+          <p class="team-bio">Trained in Paris and Mumbai, Meena brings 14 years of luxury styling expertise with a signature editorial aesthetic.</p>
+        </div>
+      </div>
+      <div class="team-card glass-card reveal reveal-delay-2">
+        <div class="team-img-wrap">
+          <img src="assets/images/team_stylist.png" alt="Zara Ali" style="object-position: 50% top;" />
+          <div class="team-img-overlay"></div>
+        </div>
+        <div class="team-info">
+          <div class="team-name">Zara Ali</div>
+          <div class="team-role">Co-Founder &bull; Lead MUA</div>
+          <p class="team-bio">A makeup virtuoso with a London pedigree, Zara transforms faces into works of art with breathtaking precision.</p>
+        </div>
+      </div>
+      <div class="team-card glass-card reveal reveal-delay-3">
+        <div class="team-img-wrap">
+          <img src="assets/images/team_stylist.png" alt="Divya Nair" style="object-position: 80% top;" />
+          <div class="team-img-overlay"></div>
+        </div>
+        <div class="team-info">
+          <div class="team-name">Divya Nair</div>
+          <div class="team-role">Senior Skin Specialist</div>
+          <p class="team-bio">A certified dermal therapist, Divya's facials are nothing short of transformative — clients call her the "Skin Whisperer."</p>
+        </div>
+      </div>
+      <div class="team-card glass-card reveal reveal-delay-4">
+        <div class="team-img-wrap">
+          <img src="assets/images/team_stylist.png" alt="Priyanka Das" style="object-position: 30% top;" />
+          <div class="team-img-overlay"></div>
+        </div>
+        <div class="team-info">
+          <div class="team-name">Priyanka Das</div>
+          <div class="team-role">Nail Art Director</div>
+          <p class="team-bio">An award-winning nail artist, Priyanka's intricate designs have graced fashion weeks and celebrity events across India.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== TIMELINE ===== -->
+  <section class="section">
+    <div style="text-align:center;margin-bottom:60px;">
+      <div class="section-label reveal" style="justify-content:center;">Our Journey</div>
+      <h2 class="section-title reveal">Six Years of <em>Excellence</em></h2>
+    </div>
+    <div class="timeline">
+      <div class="timeline-item reveal">
+        <div class="timeline-text">
+          <div class="timeline-year">2018</div>
+          <p class="timeline-desc">DemoParlour opens its doors in Kochi with a team of 2 artists and a dream of redefining luxury beauty in Kerala.</p>
+        </div>
+        <div class="timeline-dot"></div>
+        <div class="timeline-empty"></div>
+      </div>
+      <div class="timeline-item reveal">
+        <div class="timeline-empty"></div>
+        <div class="timeline-dot"></div>
+        <div class="timeline-text">
+          <div class="timeline-year">2020</div>
+          <p class="timeline-desc">Expanded to a full 3,000 sq ft salon &amp; spa, launching our signature bridal packages that quickly became the most sought-after in the region.</p>
+        </div>
+      </div>
+      <div class="timeline-item reveal">
+        <div class="timeline-text">
+          <div class="timeline-year">2022</div>
+          <p class="timeline-desc">Won 'Best Luxury Beauty Salon — South India' at the National Beauty Awards. Our team grew to 10 international specialists.</p>
+        </div>
+        <div class="timeline-dot"></div>
+        <div class="timeline-empty"></div>
+      </div>
+      <div class="timeline-item reveal">
+        <div class="timeline-empty"></div>
+        <div class="timeline-dot"></div>
+        <div class="timeline-text">
+          <div class="timeline-year">2024</div>
+          <p class="timeline-desc">Launched our exclusive DemoParlour membership program, bringing 500+ loyal clients into our inner circle of beauty and privilege.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>Demo<span>Parlour</span></h3>
+        <div class="gold-divider" style="max-width:200px;"><span>✦</span></div>
+        <p>A temple of beauty, crafted for the discerning.</p>
+        <div class="footer-social">
+          <a href="#" class="social-icon">✦</a>
+          <a href="#" class="social-icon">f</a>
+          <a href="#" class="social-icon">▶</a>
+          <a href="#" class="social-icon">P</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="services.html">Hair Styling</a></li>
+          <li><a href="services.html">Makeup Artistry</a></li>
+          <li><a href="services.html">Skin &amp; Facial</a></li>
+          <li><a href="services.html">Nail Couture</a></li>
+          <li><a href="services.html">Bridal Packages</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Visit Us</h4>
+        <ul>
+          <li><a href="#">📍 12-A Gold Avenue, MG Road, Kochi</a></li>
+          <li><a href="tel:+919876543210">📞 +91 98765 43210</a></li>
+          <li><a href="mailto:hello@lumierebeauty.in">✉ hello@lumierebeauty.in</a></li>
+          <li><a href="#">⏰ Mon–Sat: 9 AM – 8 PM</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 DemoParlour. All rights reserved.</p>
+      <p>Crafted with <span style="color:var(--color-rose);">♥</span> for beauty lovers.</p>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

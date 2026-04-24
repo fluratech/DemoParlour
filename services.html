@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <!-- Theme init: runs before CSS renders to prevent flash of wrong theme -->
+  <script>
+    (function() {
+      var t = localStorage.getItem('dp-theme') || 'dark';
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Explore DemoParlour's full range of luxury services — hair styling, makeup artistry, skin & spa, nail couture, and bridal packages." />
+  <title>Services — DemoParlour</title>
+  <link rel="stylesheet" href="assets/css/styles.css" />
+  <style>
+    /* ---- Services Page Styles ---- */
+    .services-hero-bg { background-image: url('assets/images/hair_styling.png'); }
+
+    .services-nav {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 60px;
+    }
+
+    .service-filter-btn {
+      padding: 10px 24px;
+      border: 1px solid var(--color-border);
+      border-radius: 50px;
+      background: transparent;
+      color: var(--color-text-muted);
+      font-family: var(--font-body);
+      font-size: 12px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .service-filter-btn:hover,
+    .service-filter-btn.active {
+      background: var(--gradient-gold);
+      color: #1a1200;
+      border-color: transparent;
+    }
+
+    .services-full-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+
+    .service-full-card {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      transition: var(--transition);
+      cursor: pointer;
+    }
+
+    .service-full-card:hover {
+      transform: translateY(-10px);
+      box-shadow: var(--shadow-card);
+    }
+
+    .service-full-img {
+      position: relative;
+      height: 260px;
+      overflow: hidden;
+    }
+
+    .service-full-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.7s ease;
+    }
+
+    .service-full-card:hover .service-full-img img { transform: scale(1.07); }
+
+    .service-full-img-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(12,10,15,0.8) 0%, transparent 60%);
+    }
+
+    .service-full-badge {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      padding: 6px 14px;
+      background: var(--gradient-gold);
+      color: #1a1200;
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-weight: 600;
+      border-radius: 50px;
+    }
+
+    .service-full-body {
+      padding: 28px;
+    }
+
+    .service-full-icon {
+      font-size: 1.8rem;
+      margin-bottom: 12px;
+    }
+
+    .service-full-title {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      color: var(--color-cream);
+      margin-bottom: 10px;
+    }
+
+    .service-full-desc {
+      font-size: 0.88rem;
+      color: var(--color-text-muted);
+      line-height: 1.75;
+      margin-bottom: 20px;
+    }
+
+    .service-full-items {
+      list-style: none;
+      margin-bottom: 24px;
+    }
+
+    .service-full-items li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--color-border);
+      font-size: 0.85rem;
+    }
+
+    .service-full-items li:last-child { border-bottom: none; }
+
+    .service-full-items li span:first-child { color: var(--color-text); }
+    .service-full-items li span:last-child { color: var(--color-gold); font-weight: 500; }
+
+    .service-book-btn {
+      width: 100%;
+      text-align: center;
+      justify-content: center;
+    }
+
+    /* Bridal Section */
+    .bridal-section {
+      margin-top: 100px;
+      position: relative;
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      min-height: 480px;
+      display: flex;
+      align-items: center;
+    }
+
+    .bridal-bg {
+      position: absolute;
+      inset: 0;
+    }
+
+    .bridal-bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      filter: brightness(0.3) saturate(0.8);
+    }
+
+    .bridal-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(12,10,15,0.9) 0%, rgba(12,10,15,0.5) 60%, transparent 100%);
+    }
+
+    .bridal-content {
+      position: relative;
+      z-index: 2;
+      padding: 60px 80px;
+      max-width: 600px;
+    }
+
+    .bridal-content h2 { color: var(--color-cream); margin-bottom: 16px; }
+
+    .bridal-packages {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin: 28px 0;
+    }
+
+    .bridal-pkg {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 20px;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      background: rgba(26,21,35,0.6);
+      backdrop-filter: blur(10px);
+      transition: var(--transition);
+    }
+
+    .bridal-pkg:hover {
+      border-color: var(--color-gold);
+      background: rgba(201,168,76,0.08);
+    }
+
+    .bridal-pkg-name { color: var(--color-cream); font-size: 0.95rem; }
+    .bridal-pkg-price { color: var(--color-gold); font-weight: 500; }
+
+    @media (max-width: 1024px) {
+      .services-full-grid { grid-template-columns: repeat(2, 1fr); }
+      .bridal-content { padding: 48px; }
+    }
+
+    @media (max-width: 768px) {
+      .services-full-grid { grid-template-columns: 1fr; }
+      .bridal-content { padding: 32px 24px; }
+    }
+
+    /* ---- Light Mode Overrides ---- */
+    [data-theme="light"] .service-filter-btn {
+      color: #4e3a10;
+      border-color: rgba(100,72,16,0.22);
+      background: transparent;
+    }
+    [data-theme="light"] .service-filter-btn:hover,
+    [data-theme="light"] .service-filter-btn.active {
+      background: var(--gradient-gold);
+      color: #fff;
+      border-color: transparent;
+    }
+    [data-theme="light"] .service-full-img-overlay {
+      background: linear-gradient(to top, rgba(250,246,240,0.92) 0%, transparent 60%);
+    }
+    [data-theme="light"] .service-full-title { color: #181000; }
+    [data-theme="light"] .service-full-desc { color: #4e3a10; }
+    [data-theme="light"] .service-full-items li { border-bottom-color: rgba(100,72,16,0.15); }
+    [data-theme="light"] .service-full-items li span:first-child { color: #1c1400; }
+    [data-theme="light"] .service-full-items li span:last-child { color: #7c5c14; }
+    [data-theme="light"] .bridal-pkg {
+      background: rgba(250,246,240,0.85);
+      border-color: rgba(100,72,16,0.22);
+      backdrop-filter: blur(10px);
+    }
+    [data-theme="light"] .bridal-pkg-name { color: #181000; }
+    [data-theme="light"] .bridal-pkg-price { color: #7c5c14; }
+    [data-theme="light"] .service-full-badge { color: #181000; }
+  </style>
+</head>
+<body>
+
+  <!-- Particle Canvas -->
+  <canvas id="particle-canvas"></canvas>
+  <!-- Page Transition -->
+  <div class="page-transition"></div>
+  <!-- Custom Cursor -->
+  <div class="cursor-dot"></div>
+  <div class="cursor-ring"></div>
+
+  <!-- Navigation -->
+  <nav class="navbar" id="navbar">
+    <a href="index.html" class="nav-logo">
+      <span class="nav-logo-main">Demo<span>Parlour</span></span>
+      <span class="nav-logo-sub">Luxury Parlour &amp; Spa</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="services.html" class="active">Services</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html" class="nav-cta">Book Now</a></li>
+    </ul>
+    <button class="theme-toggle" aria-label="Toggle theme">
+      <span class="toggle-icon">🌙</span>
+      <span class="toggle-label">Dark</span>
+    </button>
+    <div class="nav-hamburger" id="hamburger"><span></span><span></span><span></span></div>
+  </nav>
+  <div class="mobile-menu">
+    <a href="index.html">Home</a>
+    <a href="services.html">Services</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Book Now</a>
+    <button class="theme-toggle mobile-theme-toggle" aria-label="Toggle theme">
+      <span class="toggle-icon">🌙</span>
+      <span class="toggle-label">Dark</span>
+    </button>
+  </div>
+
+  <!-- Page Hero -->
+  <section class="page-hero">
+    <div class="page-hero-bg services-hero-bg"></div>
+    <div class="page-hero-content">
+      <div class="section-label">Signature Services</div>
+      <h1>The Art of <em style="font-style:italic;color:var(--color-gold-light);">Beauty</em></h1>
+    </div>
+  </section>
+
+  <!-- ===== SERVICES SECTION ===== -->
+  <section class="section" style="padding-top:80px;">
+    <!-- Filter Nav -->
+    <div class="services-nav reveal">
+      <button class="service-filter-btn active" data-filter="all">All Services</button>
+      <button class="service-filter-btn" data-filter="hair">Hair</button>
+      <button class="service-filter-btn" data-filter="makeup">Makeup</button>
+      <button class="service-filter-btn" data-filter="skin">Skin &amp; Spa</button>
+      <button class="service-filter-btn" data-filter="nail">Nails</button>
+    </div>
+
+    <div class="services-full-grid">
+
+      <!-- Hair -->
+      <div class="service-full-card glass-card tilt-card reveal reveal-delay-1" data-category="hair">
+        <div class="service-full-img img-shine">
+          <img src="assets/images/hair_styling.png" alt="Hair Artistry" />
+          <div class="service-full-img-overlay"></div>
+          <div class="service-full-badge">Popular</div>
+        </div>
+        <div class="service-full-body">
+          <div class="service-full-icon">✂️</div>
+          <h3 class="service-full-title">Hair Artistry</h3>
+          <p class="service-full-desc">From precision cuts to balayage masterpieces, our hair artists sculpt styles that speak your language — effortlessly chic and perfectly you.</p>
+          <ul class="service-full-items">
+            <li><span>Signature Haircut &amp; Style</span><span>₹800</span></li>
+            <li><span>Global Colour / Balayage</span><span>₹2,500</span></li>
+            <li><span>Keratin Smoothing</span><span>₹3,500</span></li>
+            <li><span>Bridal Hair Updo</span><span>₹2,000</span></li>
+            <li><span>Deep Conditioning Ritual</span><span>₹1,200</span></li>
+          </ul>
+          <a href="contact.html" class="btn btn-gold service-book-btn">Book This Service</a>
+        </div>
+      </div>
+
+      <!-- Makeup -->
+      <div class="service-full-card glass-card tilt-card reveal reveal-delay-2" data-category="makeup">
+        <div class="service-full-img img-shine">
+          <img src="assets/images/makeup_service.png" alt="Makeup Artistry" />
+          <div class="service-full-img-overlay"></div>
+          <div class="service-full-badge">Bestseller</div>
+        </div>
+        <div class="service-full-body">
+          <div class="service-full-icon">💄</div>
+          <h3 class="service-full-title">Makeup Studio</h3>
+          <p class="service-full-desc">Our makeup artists blend science and artistry using only luxury brands to create your most stunning look — whether natural or dramatic.</p>
+          <ul class="service-full-items">
+            <li><span>Everyday Glow Makeup</span><span>₹1,200</span></li>
+            <li><span>Party / Evening Look</span><span>₹1,800</span></li>
+            <li><span>Airbrush Makeup</span><span>₹2,500</span></li>
+            <li><span>HD Makeup (Bridal)</span><span>₹3,500</span></li>
+            <li><span>Trial Makeup Session</span><span>₹1,500</span></li>
+          </ul>
+          <a href="contact.html" class="btn btn-gold service-book-btn">Book This Service</a>
+        </div>
+      </div>
+
+      <!-- Skincare -->
+      <div class="service-full-card glass-card tilt-card reveal reveal-delay-3" data-category="skin">
+        <div class="service-full-img img-shine">
+          <img src="assets/images/spa_facial.png" alt="Skin & Spa" />
+          <div class="service-full-img-overlay"></div>
+          <div class="service-full-badge">Luxe</div>
+        </div>
+        <div class="service-full-body">
+          <div class="service-full-icon">🌸</div>
+          <h3 class="service-full-title">Skin &amp; Spa</h3>
+          <p class="service-full-desc">Indulge in our bespoke facial rituals and body treatments that rejuvenate, restore, and reveal the breathtaking skin you deserve.</p>
+          <ul class="service-full-items">
+            <li><span>Classic Deep Cleanse Facial</span><span>₹1,500</span></li>
+            <li><span>Anti-Aging Gold Facial</span><span>₹2,800</span></li>
+            <li><span>HydraFacial Treatment</span><span>₹3,200</span></li>
+            <li><span>Full Body Scrub &amp; Wrap</span><span>₹2,500</span></li>
+            <li><span>Aromatherapy Massage</span><span>₹2,000</span></li>
+          </ul>
+          <a href="contact.html" class="btn btn-gold service-book-btn">Book This Service</a>
+        </div>
+      </div>
+
+      <!-- Nails -->
+      <div class="service-full-card glass-card tilt-card reveal reveal-delay-1" data-category="nail">
+        <div class="service-full-img img-shine">
+          <img src="assets/images/nail_beauty.png" alt="Nail Couture" />
+          <div class="service-full-img-overlay"></div>
+          <div class="service-full-badge">Artistic</div>
+        </div>
+        <div class="service-full-body">
+          <div class="service-full-icon">💅</div>
+          <h3 class="service-full-title">Nail Couture</h3>
+          <p class="service-full-desc">Elevate your fingertips with our nail art maestros who turn every nail into a canvas — intricate designs, gemstones, and flawless finishes.</p>
+          <ul class="service-full-items">
+            <li><span>Classic Manicure / Pedicure</span><span>₹500</span></li>
+            <li><span>Gel Polish (French / Ombre)</span><span>₹900</span></li>
+            <li><span>Custom Nail Art (full set)</span><span>₹1,500</span></li>
+            <li><span>Nail Extension (Acrylic)</span><span>₹1,800</span></li>
+            <li><span>Luxury Spa Pedicure</span><span>₹1,200</span></li>
+          </ul>
+          <a href="contact.html" class="btn btn-gold service-book-btn">Book This Service</a>
+        </div>
+      </div>
+
+      <!-- Eyebrows -->
+      <div class="service-full-card glass-card tilt-card reveal reveal-delay-2" data-category="makeup">
+        <div class="service-full-img img-shine">
+          <img src="assets/images/makeup_service.png" alt="Brow & Lash" style="object-position: 60% center;" />
+          <div class="service-full-img-overlay"></div>
+        </div>
+        <div class="service-full-body">
+          <div class="service-full-icon">🪄</div>
+          <h3 class="service-full-title">Brow &amp; Lash Studio</h3>
+          <p class="service-full-desc">Frame your face with precision threading, tinting, and lash extensions designed to open your gaze and redefine your beauty effortlessly.</p>
+          <ul class="service-full-items">
+            <li><span>Eyebrow Threading &amp; Tint</span><span>₹400</span></li>
+            <li><span>Microblading (Semi-permanent)</span><span>₹4,500</span></li>
+            <li><span>Classic Lash Extensions</span><span>₹2,200</span></li>
+            <li><span>Volume / Mega Lashes</span><span>₹3,000</span></li>
+            <li><span>Lash Lift &amp; Tint</span><span>₹1,800</span></li>
+          </ul>
+          <a href="contact.html" class="btn btn-gold service-book-btn">Book This Service</a>
+        </div>
+      </div>
+
+      <!-- Hair Removal -->
+      <div class="service-full-card glass-card tilt-card reveal reveal-delay-3" data-category="skin">
+        <div class="service-full-img img-shine">
+          <img src="assets/images/spa_facial.png" alt="Waxing & Hair Removal" style="object-position: center 30%;" />
+          <div class="service-full-img-overlay"></div>
+        </div>
+        <div class="service-full-body">
+          <div class="service-full-icon">🌟</div>
+          <h3 class="service-full-title">Smooth &amp; Refresh</h3>
+          <p class="service-full-desc">From Brazilian waxing to laser hair reduction consultations — our smooth skin specialists ensure pure comfort with impeccable results.</p>
+          <ul class="service-full-items">
+            <li><span>Full Body Waxing</span><span>₹1,800</span></li>
+            <li><span>Rica Wax (Face)</span><span>₹350</span></li>
+            <li><span>Chocolate Waxing (Full Legs)</span><span>₹900</span></li>
+            <li><span>Brazilian Wax</span><span>₹1,200</span></li>
+            <li><span>Eyebrow Wax &amp; Shape</span><span>₹250</span></li>
+          </ul>
+          <a href="contact.html" class="btn btn-gold service-book-btn">Book This Service</a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Bridal Package -->
+    <div class="bridal-section reveal">
+      <div class="bridal-bg">
+        <img src="assets/images/bridal_makeup.png" alt="Bridal Package" />
+      </div>
+      <div class="bridal-overlay"></div>
+      <div class="bridal-content">
+        <div class="section-label">Exclusively Yours</div>
+        <h2 class="section-title">Bridal <em>Packages</em></h2>
+        <p class="section-subtitle">Your wedding day is the most special day of your life. Our curated bridal packages ensure you look and feel absolutely divine, from the first trial to the final touch-up.</p>
+        <div class="bridal-packages">
+          <div class="bridal-pkg">
+            <span class="bridal-pkg-name">✦ Silver Bride — Hair + Makeup</span>
+            <span class="bridal-pkg-price">₹8,500</span>
+          </div>
+          <div class="bridal-pkg">
+            <span class="bridal-pkg-name">✦ Gold Bride — Hair + HD Makeup + Mehendi</span>
+            <span class="bridal-pkg-price">₹14,500</span>
+          </div>
+          <div class="bridal-pkg">
+            <span class="bridal-pkg-name">✦ Diamond Bride — Full Day Luxury Package</span>
+            <span class="bridal-pkg-price">₹24,999</span>
+          </div>
+        </div>
+        <a href="contact.html" class="btn btn-rose">Enquire About Bridal Packages</a>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>Demo<span>Parlour</span></h3>
+        <div class="gold-divider" style="max-width:200px;"><span>✦</span></div>
+        <p>A temple of beauty, crafted for the discerning. Where every visit is a celebration of who you are.</p>
+        <div class="footer-social">
+          <a href="#" class="social-icon">✦</a>
+          <a href="#" class="social-icon">f</a>
+          <a href="#" class="social-icon">▶</a>
+          <a href="#" class="social-icon">P</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="services.html">Hair Styling</a></li>
+          <li><a href="services.html">Makeup Artistry</a></li>
+          <li><a href="services.html">Skin &amp; Facial</a></li>
+          <li><a href="services.html">Nail Couture</a></li>
+          <li><a href="services.html">Bridal Packages</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Visit Us</h4>
+        <ul>
+          <li><a href="#">📍 12-A Gold Avenue, MG Road, Kochi</a></li>
+          <li><a href="tel:+919876543210">📞 +91 98765 43210</a></li>
+          <li><a href="mailto:hello@lumierebeauty.in">✉ hello@lumierebeauty.in</a></li>
+          <li><a href="#">⏰ Mon–Sat: 9 AM – 8 PM</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 DemoParlour. All rights reserved.</p>
+      <p>Crafted with <span style="color:var(--color-rose);">♥</span> for beauty lovers.</p>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+  <script>
+    // Service filter
+    const filterBtns = document.querySelectorAll('.service-filter-btn');
+    const serviceCards = document.querySelectorAll('.service-full-card');
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.getAttribute('data-filter');
+        serviceCards.forEach(card => {
+          const cat = card.getAttribute('data-category');
+          if (filter === 'all' || cat === filter) {
+            card.style.display = '';
+            card.style.animation = 'scaleIn 0.4s ease forwards';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>
