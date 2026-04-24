@@ -272,3 +272,26 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
 });
+
+// ---- Fix blank screen on browser Back button ----
+// When the browser restores a page from bfcache (back-forward cache),
+// DOMContentLoaded does NOT fire — but the page-transition overlay may
+// still have the .active class (full-screen cover) from when the user
+// navigated away. The pageshow event fires reliably in both cases.
+window.addEventListener('pageshow', (e) => {
+  const pt = document.querySelector('.page-transition');
+  if (!pt) return;
+
+  if (e.persisted) {
+    // Page was restored from bfcache — remove overlay instantly (no animation)
+    pt.style.transition = 'none';
+    pt.classList.remove('active');
+    // Force reflow so the browser applies the style, then restore transition
+    void pt.offsetWidth;
+    pt.style.transition = '';
+  } else {
+    // Normal page load — just ensure the overlay is hidden in case it lingered
+    pt.classList.remove('active');
+  }
+});
+
